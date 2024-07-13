@@ -1,0 +1,11 @@
+[project]
+name = "pixi"
+version = "0.1.0"
+description = "Add a short description here"
+authors = ["Matt Richards <mrichards7@outlook.com.au>"]
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[tasks]
+
+[dependencies]

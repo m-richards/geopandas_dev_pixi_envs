@@ -1,0 +1,48 @@
+[project]
+name = "pixi"
+version = "0.1.0"
+description = "Add a short description here"
+authors = ["Matt Richards <mrichards7@outlook.com.au>"]
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[tasks]
+_install = { cmd = "pixi install" }
+setup_pandas = {cmd = "python -m pip install -ve C:/Data/myDocuments/Code/python_other/data_science_open_source/pandas_new --no-build-isolation --config-settings builddir=\"builddir2\" --config-settings editable-verbose=true ", depends_on = ["_install"] }
+setup = { cmd = "python -m pip install -e C:/Data/myDocuments/Code/geospatial/geopandas", cwd = ".", depends_on = ["setup_pandas"] }
+test = "pytest"
+
+[dependencies]
+pytz = ">=2024.1,<2025"
+matplotlib = ">=3.8.4,<3.9"
+pytest-asyncio = ">=0.23.6,<0.24"
+python-dateutil = ">=2.9.0,<2.10"
+meson = ">=1.4.0,<1.5"
+cython = ">=3.0.10,<3.1"
+pytest-xdist = ">=3.5.0,<3.6"
+hypothesis = ">=6.100.1,<6.101"
+scipy = ">=1.13.0,<1.14"
+numpy = ">=1.26.4,<1.27"
+pyarrow = ">=15.0.2,<15.1"
+meson-python = ">=0.16.0,<0.17"
+versioneer = ">=0.29,<1"
+pytest = ">=8.2.2,<8.3"
+pip = ">=24.0,<25"
+pixi-pycharm = ">=0.0.5,<0.1"
+ipython = ">=8.22.2,<8.23"
+jupyterlab = ">=4.1.6,<4.2"
+pluggy = ">=1.5.0,<1.6"
+[pypi-dependencies]
+#pandas = {path="C:/Data/myDocuments/Code/python_other/data_science_open_source/pandas_new", editable=true}
+#geopandas = {path="C:/Data/myDocuments/Code/geospatial/geopandas", editable=true}
+
+
+[feature.py310.dependencies]
+python = "~=3.10.0"
+
+[feature.py311.dependencies]
+python = "~=3.11.0"
+
+[environments]
+default = ["py311"]
+py310 = ["py310"]
