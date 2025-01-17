@@ -9,7 +9,11 @@ platforms = ["win-64"]
 [tasks]
 _install = { cmd = "pixi install" }
 test = "pytest"
-setup_geopandas = { cmd = "python -m pip install -e C:/Data/myDocuments/Code/geospatial/geopandas", cwd = "."}
+# setup_geopandas = { cmd = "python -m pip install -e C:/Data/myDocuments/Code/geospatial/geopandas", cwd = "."}
+
+# Editable installs
+[tool.pixi.pypi-dependencies]
+geopandas = { path = "./geopandas_fork", editable = true }
 
 
 [dependencies]
@@ -34,15 +38,15 @@ jupyterlab = ">=4.2.3,<4.3"
 pixi-pycharm = ">=0.0.6,<0.1"
 pytest-xdist = ">=3.6.1,<3.7"
 geodatasets = ">0.0.1"
-duckdb = ">=1.0"
+# duckdb = ">=1.0"
 
 # Geopandas deps (not required by pandas)
 pyogrio = ">=0.8.0,<0.10"
 shapely = ">=2.0.4,<2.1"
 fiona = ">=1.9.6,<1.10"
 pyproj = ">=3.6.1,<3.9"
-polars = ">=1.6.0,<1.7"
-sphinx = ">=7.4.7,<9"
+# polars = ">=1.6.0,<1.7"
+# sphinx = ">=7.4.7,<9"
 
 
 [feature.pandas-dev.tasks]
@@ -86,16 +90,23 @@ python = "3.10.*"
 python = "3.9.*"
 
 [feature.docs.dependencies]
+# These come mostly from doc/environment.yml
+# required machinery
 sphinx = "*"
 pydata-sphinx-theme = "*"
 numpydoc = "*"
 pillow = "*"
-# sphinx-gallery = "*"
+sphinx-gallery = "*"
+sphinx-toggleprompt = "*"
 nbsphinx = "*"
+myst-parser = "*"
+# Optional deps needed to build docs
+mapclassify = "*"
+geopy = "*"
 
 [feature.docs.tasks]
-test = "echo foo"
-build_docs = { cmd = "make.bat html", cwd = "./geopandas_fork/doc"}pyh
+build_docs = { cmd = "make.bat html", cwd = "./geopandas_fork/doc"}
+clean_docs = { cmd = "make.bat clean", cwd = "./geopandas_fork/doc"}
 
 
 

@@ -20,5 +20,10 @@ pixi run --environment pd20 python
 
 pixi run --environment pd22 python
 
+## Build docs
+// todo make this run in this environment by default
+`pixi run --environment docs build_docs`
+
+
 
 
