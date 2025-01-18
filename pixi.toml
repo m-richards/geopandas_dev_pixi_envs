@@ -12,7 +12,7 @@ test = "pytest"
 # setup_geopandas = { cmd = "python -m pip install -e C:/Data/myDocuments/Code/geospatial/geopandas", cwd = "."}
 
 # Editable installs
-[tool.pixi.pypi-dependencies]
+[pypi-dependencies]
 geopandas = { path = "./geopandas_fork", editable = true }
 
 
@@ -73,10 +73,6 @@ SQLalchemy = "<2.1"
 pandas = ">=2.0,<2.1"
 numpy = ">=1.21,<2"
 
-[feature.pandas14.dependencies]
-pandas = "==1.4.4"
-numpy = ">=1.21,<2"
-
 [feature.py312.dependencies]
 python = "3.12.*"
 
@@ -86,8 +82,6 @@ python = "3.11.*"
 [feature.py310.dependencies]
 python = "3.10.*"
 
-[feature.py39.dependencies]
-python = "3.9.*"
 
 [feature.docs.dependencies]
 # These come mostly from doc/environment.yml
@@ -103,6 +97,15 @@ myst-parser = "*"
 # Optional deps needed to build docs
 mapclassify = "*"
 geopy = "*"
+mock = "*"
+pyepsg = "*"
+jinja2 = "*"
+doc2dash = "*"
+matplotlib-scalebar = "*"
+jupyter_client = "*"
+ipykernel = "*"
+folium = "*"
+xyzservices = "*"
 
 [feature.docs.tasks]
 build_docs = { cmd = "make.bat html", cwd = "./geopandas_fork/doc"}
@@ -115,9 +118,8 @@ clean_docs = { cmd = "make.bat clean", cwd = "./geopandas_fork/doc"}
 # would need to create separate features with separate builddir specifications for different python versions
 pandas-dev = ["pandas-dev", "py312"]
 default = ["pandas22", "py312"]
-docs = ["pandas22", "py312", "docs"]
+docs = ["pandas22", "py311", "docs"] # TODO put back to py312 with scalebar
 
 pd22 = ["pandas22", "py311"]
 pd21 = ["pandas21", "py310"]
 pd20 = ["pandas20", "py310"]
-pd14 = ["pandas14", "py39"]
