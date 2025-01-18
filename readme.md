@@ -9,6 +9,7 @@ This repo contains my latest method of managing these environments using [pixi](
 
 ## Layout
 Here I assume a structure:
+```
 geopandas/
 ├── # This folder corresponds to https://github.com/m-richards/geopandas_dev_pixi_envs
 ├── .pixi/
@@ -24,7 +25,7 @@ geopandas/
     ├── .gitignore
     ├── .LICENSE.TXT
     └── README.md
-
+```
 
 ## Environments
 Environments are declared by the environments table in pixi.toml
