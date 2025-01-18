@@ -174,3 +174,5 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+# Name of fork folder
+./geopandas_fork
