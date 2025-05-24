@@ -46,6 +46,7 @@ I have an environment building against the main version of pandas as an editiabl
 
 `pixi run docs build_docs`
 `pixi run docs clean_docs`
+
 (Note this command is defined such that it uses the docs environment by default)
 
 

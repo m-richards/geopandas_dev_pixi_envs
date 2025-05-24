@@ -38,26 +38,28 @@ jupyterlab = ">=4.2.3,<4.3"
 pixi-pycharm = ">=0.0.6,<0.1"
 pytest-xdist = ">=3.6.1,<3.7"
 geodatasets = ">0.0.1"
-# duckdb = ">=1.0"
+
 
 # Geopandas deps (not required by pandas)
 pyogrio = ">=0.8.0,<0.10"
-shapely = ">=2.0.4,<2.1"
-fiona = ">=1.9.6,<1.10"
+#shapely = ">=2.0.4,<2.1"
+#fiona = ">=1.9.6,<1.10"
 pyproj = ">=3.6.1,<3.9"
+geopy = ">=2.4.1,<3"
 # polars = ">=1.6.0,<1.7"
-# sphinx = ">=7.4.7,<9"
 
 
 [feature.pandas-dev.tasks]
 # TODO setup pandas should declare inputs https://pixi.sh/v0.22.0/features/advanced_tasks/#caching
 #  to get caching right
-setup_pandas = {cmd = "python -m pip install -ve C:/Data/myDocuments/Code/python_other/data_science_open_source/pandas_new --no-build-isolation --config-settings builddir=\"builddir3\" --config-settings editable-verbose=true ", depends-on = ["_install"] }
+# also needed to do a manual pixi global install meson
+# because of issues in the _pandas_editable_loader package injected
+# setup_pandas = {cmd = "python -m pip install -ve C:/Data/myDocuments/Code/python_other/data_science_open_source/pandas_new --no-build-isolation --config-settings builddir=\"builddir3\" --config-settings editable-verbose=true ", depends-on = ["_install"] }
+setup_pandas = {cmd = "python -m pip install -ve C:/Data/myDocuments/Code/python_other/data_science_open_source/pandas_new --no-build-isolation --config-settings builddir=\"builddir3\"", depends-on = ["_install"] }
 
 [feature.pandas22.dependencies]
 pandas = "==2.2.3"
 numpy = "==1.26.4"
-shapely = "==2.0.4"
 pyproj = "==3.7.0"
 pip = "==24.3.1"
 pytest-cov = "==6.0.0"
@@ -71,6 +73,8 @@ SQLalchemy = "<2.1"
 [feature.pandas20.dependencies]
 pandas = ">=2.0,<2.1"
 numpy = ">=1.21,<2"
+shapely = "==2.1.0"
+
 
 [feature.py312.dependencies]
 python = "3.12.*"
@@ -81,6 +85,19 @@ python = "3.11.*"
 [feature.py310.dependencies]
 python = "3.10.*"
 
+
+[feature.fiona.dependencies]
+fiona = "*"
+
+
+[feature.plotting.dependencies]
+folium = "*"
+mapclassify = "*"
+matplotlib = "*"
+
+[feature.data_science.dependencies]
+polars = ">=1.6.0,<1.7"
+duckdb = ">=1.0"
 
 [feature.docs.dependencies]
 # These come mostly from doc/environment.yml
@@ -110,15 +127,22 @@ xyzservices = "*"
 build_docs = { cmd = "make.bat html", cwd = "./geopandas_fork/doc"}
 clean_docs = { cmd = "make.bat clean", cwd = "./geopandas_fork/doc"}
 
+[feature.mypy.dependencies]
+mypy = "*"
+# pandas-stubs = "*"
+
+[feature.mypy.tasks]
+mypy = { cmd = "mypy .", cwd = "./geopandas_fork/"}
+
 
 
 [environments]
 # Note, only pull pandas-dev into a single version of python, due to cython / abi
 # would need to create separate features with separate builddir specifications for different python versions
 pandas-dev = ["pandas-dev", "py312"]
-default = ["pandas22", "py312"]
+default = ["pandas22", "py312", "plotting", ]
 docs = ["pandas22", "py311", "docs"] # TODO put back to py312 with scalebar
 
-pd22 = ["pandas22", "py311"]
+pd22 = ["pandas22", "py311", "plotting", "mypy", "fiona"]
 pd21 = ["pandas21", "py310"]
-pd20 = ["pandas20", "py310"]
+pd20 = ["pandas20", "py310", "data_science"]
